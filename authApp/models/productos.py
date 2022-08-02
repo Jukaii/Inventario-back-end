@@ -2,7 +2,7 @@ from django.db import models
 from .user import User
 from .categoria import Categoria
 
-class Products(models.Model):
+class Productos(models.Model):
     id = models.AutoField(primary_key=True)
     descripcion = models.CharField('Descripción', max_length = 50)
     codigo = models.IntegerField(default=0)
