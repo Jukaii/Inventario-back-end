@@ -71,7 +71,8 @@ REST_FRAMEWORK = {
 ),
 'DEFAULT_AUTHENTICATION_CLASSES': (
 'rest_framework_simplejwt.authentication.JWTAuthentication',
-)
+),
+'TEST_REQUEST_DEFAULT_FORMAT': 'json'
 }
 
 AUTH_USER_MODEL = 'authApp.User'
@@ -109,6 +110,7 @@ DATABASES = {
 'PASSWORD': 'a00ec892b41fe5081650c0c8bdbf64293e2b97fc8b8a3cfabd5f4377629d34a0',
 'HOST': 'ec2-54-225-234-165.compute-1.amazonaws.com',
 'PORT': '5432',
+'TEST': {'MIRROR': 'default',},
 }
 }
 

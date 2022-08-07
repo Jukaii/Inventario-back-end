@@ -1,32 +1,21 @@
 from rest_framework import serializers
 from authApp.models.user import User
-from authApp.models.account import Account
-from authApp.serializers.AccountSerializer import AccountSerializer
-
 class UserSerializer(serializers.ModelSerializer):
-    account = AccountSerializer()
     class Meta:
         model = User
-        fields = ['id', 'username', 'password', 'name', 'email', 'account']
+        fields = ['id', 'nombre', 'apellido', 'username', 'password', 'telefono', 'email']
         
     def create(self, validated_data):
-        accountData = validated_data.pop('account')
         userInstance = User.objects.create(**validated_data)
-        Account.objects.create(user=userInstance, **accountData)
         return userInstance
-    
+        
     def to_representation(self, obj):
         user = User.objects.get(id=obj.id)
-        account = Account.objects.get(user=obj.id)
         return {
                 'id': user.id,
+                'nombre': user.nombre,
+                'apellido': user.apellido,
                 'username': user.username,
-                'name': user.name,
+                'telefono': user.telefono,
                 'email': user.email,
-                'account': {
-                    'id': account.id,
-                    'balance': account.balance,
-                    'lastChangeDate': account.lastChangeDate,
-                    'isActive': account.isActive
-                    }
                 }    
